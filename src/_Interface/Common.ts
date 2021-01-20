@@ -1,35 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
 
 export interface Common {
-    Middleware: (req: Request, res: Response, next: NextFunction) => any,
+    Middleware: (req: Request, res: Response, next: NextFunction) => any
+}
+
+export interface resHandler {
+    statusOk: <T>(data: T, messages: Array<string>) => any;
+    statusServerError: (messages: Array<string>) => any;
+    statusError: (messages: Array<string>) => any;
+    statusUnAuthorized: (messages: Array<string>) => any;
+    statusUnValid: (messages: Array<string>) => any;
 }
 
 
-
-// 200 | 201
-export type statusOk<T> = {
-    data: T;
-    errors: Array<string>;
+export interface responseType<T> {
+    statusOk: { data: T, messages: Array<string> };
+    statusServerError: { messages: Array<string> };
+    statusError: { messages: Array<string> }
+    statusUnAuthorized: { messages: Array<string> }
+    statusUnValid: { messages: Array<string> }
 }
-
-// 400
-export type statusError = {
-    errors: Array<string>
-}
-
-// 401
-export type statusUnAuthorized = {
-    errors: Array<string>
-}
-
-// 500
-export type statusServerError = {
-    errors: Array<string>
-}
-
-// 422
-export type statusUnValid = {
-    errors: Array<string>
-}
-
 
