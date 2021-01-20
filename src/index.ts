@@ -6,14 +6,17 @@ import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 import mongoSanitize from 'express-mongo-sanitize';
-import xss from 'xss-clean';
 import bodyParser from 'body-parser';
 import rfs from 'rotating-file-stream';
 import path from 'path';
+
 import config from './config/index';
+import { Handler } from './Utils/tools';
+//Routes 
+import AuthRoute from './_routes/auth';
 
+const xss = require('xss-clean');
 const app = express();
-
 
 
 
@@ -66,10 +69,25 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// server error Handler
+app.use((req, res, next) => {
+    try { next(); } catch (err) {
+        if (process.env.NODE_ENV === 'development') {
+            console.log(err);
+            Handler(res).statusServerError([err])
+        } else {
+            Handler(res).statusServerError(['Server error try again']);
+        }
+    }
+})
+
+
+
 
 
 
 // Adding Routes ..
+app.use('/api/auth', AuthRoute);
 
 
 

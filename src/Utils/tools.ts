@@ -4,7 +4,7 @@ import { Response } from 'express'
 
 
 // NOTE It handles all the requests 
-const resHandler = (res: Response): resHandler => ({
+export const Handler = (res: Response): resHandler => ({
 
     statusOk: <T>(data: T, messages: Array<string>) => {
         const payload: responseType<T>['statusOk'] = { data, messages };

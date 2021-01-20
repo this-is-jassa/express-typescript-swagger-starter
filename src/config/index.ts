@@ -1,7 +1,5 @@
-if (process.env.NODE_ENV === 'development') {
-    const dotenv = require('dotenv');
-    dotenv.config();
-}
+import 'dotenv/config'
+
 
 export default {
     mongo_url: process.env.MONGO_CONNECTION,

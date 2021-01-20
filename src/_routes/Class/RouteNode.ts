@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { Common } from '../../_Interface/Common';
 
-export class RouteNode {
 
-    private router: Router;
+export default class RouteNode {
+
+    readonly router: Router;
 
     constructor() {
         this.router = Router();
@@ -28,11 +29,6 @@ export class RouteNode {
     public Put(url: string, middleware: Array<Common['Middleware']>): void {
         this.router.put(url, middleware);
     }
-
-
-
-    public get Route(): Router {
-        return this.router
-    }
+    
 
 }
