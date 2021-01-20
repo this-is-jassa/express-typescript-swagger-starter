@@ -1,11 +1,18 @@
-import RouteNode from './Class/RouteNode';
+import RouteNode from './Class/RouteNode'
+import { Handler } from '../Utils/tools'
 
-const Router = new RouteNode();
+const Router = new RouteNode()
 
 Router.Get('/login', [
-    (req, res, next) => {
-        res.status(200).json('hello');
+  async (req, res, next) => {
+    const sa = {
+      de: 'fe',
+      ded: {
+        desa: 'ede',
+      },
     }
-]);
+    Handler(res).statusOk(sa, [])
+  },
+])
 
-export default Router.router;
+export default Router.router

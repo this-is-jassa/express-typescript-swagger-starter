@@ -1,34 +1,30 @@
-import { Router } from 'express';
-import { Common } from '../../_Interface/Common';
-
+import { Router } from 'express'
+import { Common } from '../../_Interface/Common'
 
 export default class RouteNode {
+  readonly router: Router;
 
-    readonly router: Router;
+  constructor() {
+    this.router = Router();
+  }
 
-    constructor() {
-        this.router = Router();
-    }
+  public use(url: string, _router: Router): void {
+    this.router.use(url, _router);
+  }
 
-    public use(url: string, _router: Router): void {
-        this.router.use(url, _router);
-    }
+  public Get(url: string, middleware: Array<Common['Middleware']>): void {
+    this.router.get(url, middleware);
+  }
 
-    public Get(url: string, middleware: Array<Common['Middleware']>): void {
-        this.router.get(url, middleware);
-    }
+  public Post(url: string, middleware: Array<Common['Middleware']>): void {
+    this.router.post(url, middleware);
+  }
 
-    public Post(url: string, middleware: Array<Common['Middleware']>): void {
-        this.router.post(url, middleware);
-    }
+  public Delete(url: string, middleware: Array<Common['Middleware']>): void {
+    this.router.delete(url, middleware);
+  }
 
-    public Delete(url: string, middleware: Array<Common['Middleware']>): void {
-        this.router.delete(url, middleware);
-    }
-
-    public Put(url: string, middleware: Array<Common['Middleware']>): void {
-        this.router.put(url, middleware);
-    }
-    
-
+  public Put(url: string, middleware: Array<Common['Middleware']>): void {
+    this.router.put(url, middleware);
+  }
 }
