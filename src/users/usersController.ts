@@ -8,13 +8,16 @@ import {
     Query,
     Route,
     SuccessResponse,
+    Security
 } from "tsoa";
 import { User } from "./user";
 import { UsersService, UserCreationParams } from "./usersService";
+import { SecurityName } from '../Auth/Auth';
 
 @Route("users")
 export class UsersController extends Controller {
-    
+
+    @Security(SecurityName.JWT)
     @Get("{userId}")
     public async getUser(
         @Path() userId: number,
